@@ -1,76 +1,276 @@
 version: '3'
 services:
-  slave_1:
+################ BLOCK 1 ##################
+  slave_1_1:
     build:
       dockerfile: DockerfileNode
       context: .
     image: internship_node
-    hostname: slave_1
+    hostname: slave_1_1
     environment:
       NODE_TYPE: SLAVE
     networks:
       lan_1:
         ipv4_address: 10.1.0.11
-    ports:
-    - '4801:22'
-    volumes: &ssh-volume
-    - ./ssh:/root/.ssh
-  slave_2:
+
+  slave_1_2:
     build:
       dockerfile: DockerfileNode
       context: .
     image: internship_node
-    hostname: slave_2
+    hostname: slave_1_2
     environment:
       NODE_TYPE: SLAVE
     networks:
       lan_1:
         ipv4_address: 10.1.0.12
-    ports:
-    - '4802:22'
-    volumes: *ssh-volume
-  slave_3:
+
+
+  slave_1_3:
     build:
       dockerfile: DockerfileNode
       context: .
     image: internship_node
-    hostname: slave_3
+    hostname: slave_1_3
     environment:
       NODE_TYPE: SLAVE
     networks:
       lan_1:
         ipv4_address: 10.1.0.13
-    ports:
-    - '4803:22'
-    volumes: *ssh-volume
-  slave_4:
+
+
+  slave_1_4:
     build:
       dockerfile: DockerfileNode
       context: .
     image: internship_node
-    hostname: slave_4
+    hostname: slave_1_4
     environment:
       NODE_TYPE: SLAVE
     networks:
       lan_1:
         ipv4_address: 10.1.0.14
-    ports:
-    - '4804:22'
-    volumes: *ssh-volume
-  master_1:
+
+
+  master_1_1:
     build:
       dockerfile: DockerfileNode
       context: .
     image: internship_node
-    hostname: master_1
+    hostname: master_1_1
     environment:
       NODE_TYPE: MASTER
     networks:
       lan_1:
         ipv4_address: 10.1.0.10
-    ports:
-    - '4800:22'
-    volumes: *ssh-volume
+
+
+
+ 
+################ BLOCK 2 ##################
+  slave_2_2:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_2_2
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_1:
+        ipv4_address: 10.2.0.11
+
+
+  slave_2_2:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_2_2
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_2:
+        ipv4_address: 10.2.0.12
+
+
+  slave_2_3:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_2_3
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_2:
+        ipv4_address: 10.2.0.13
+
+
+  slave_2_4:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_2_4
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_2:
+        ipv4_address: 10.2.0.14
+
+
+  master_2_1:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: master_2_1
+    environment:
+      NODE_TYPE: MASTER
+    networks:
+      lan_2:
+        ipv4_address: 10.2.0.10
+
+
+
+ 
+################ BLOCK 3 ##################
+  slave_3_1:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_3_1
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_3:
+        ipv4_address: 10.3.0.11
+
+
+  slave_3_1:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_3_1
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_3:
+        ipv4_address: 10.3.0.12
+
+
+  slave_3_3:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_3_3
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_3:
+        ipv4_address: 10.3.0.13
+
+
+  slave_3_4:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_3_4
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_3:
+        ipv4_address: 10.3.0.14
+
+
+  master_3_1:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: master_3_1
+    environment:
+      NODE_TYPE: MASTER
+    networks:
+      lan_3:
+        ipv4_address: 10.3.0.10
+
+
+
+ 
+################ BLOCK 4 ##################
+  slave_4_1:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_4_1
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_4:
+        ipv4_address: 10.4.0.11
+
+
+  slave_4_2:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_4_2
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_4:
+        ipv4_address: 10.4.0.12
+
+
+  slave_4_3:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_4_3
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_4:
+        ipv4_address: 10.4.0.13
+
+
+  slave_4_4:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_4_4
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_4:
+        ipv4_address: 10.4.0.14
+
+
+  master_4_1:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: master_4_1
+    environment:
+      NODE_TYPE: MASTER
+    networks:
+      lan_4:
+        ipv4_address: 10.4.0.10
+
+
+
+ 
 
   jenkins:
     build:
@@ -80,8 +280,6 @@ services:
     hostname: myjenkins
     volumes: 
     - /home/student/jenkins_home:/var/jenkins_home
-    - ./tests:./tests
-    - ./ssh:/home/jenkins/.ssh
     - /var/run/docker.sock:/var/run/docker.sock
     - /root/.docker/config.json:/home/jenkins/.docker/config.json
     dns:
