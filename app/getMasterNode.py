@@ -6,5 +6,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
                 data, address = sock.recvfrom(1024)
                 data = str(data, 'utf-8')
                 if str(data)=="INTERNSHIP-DISCOVERY":
-                    sock.close()
                     sys.stdout.write(address[0])
