@@ -1,0 +1,139 @@
+version: '3'
+services:
+  slave_1:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_1
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_1:
+        ipv4_address: 10.1.0.11
+    ports:
+    - '4801:22'
+    volumes: &ssh-volume
+    - ./ssh:/root/.ssh
+  slave_2:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_2
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_1:
+        ipv4_address: 10.1.0.12
+    ports:
+    - '4802:22'
+    volumes: *ssh-volume
+  slave_3:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_3
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_1:
+        ipv4_address: 10.1.0.13
+    ports:
+    - '4803:22'
+    volumes: *ssh-volume
+  slave_4:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: slave_4
+    environment:
+      NODE_TYPE: SLAVE
+    networks:
+      lan_1:
+        ipv4_address: 10.1.0.14
+    ports:
+    - '4804:22'
+    volumes: *ssh-volume
+  master_1:
+    build:
+      dockerfile: DockerfileNode
+      context: .
+    image: internship_node
+    hostname: master_1
+    environment:
+      NODE_TYPE: MASTER
+    networks:
+      lan_1:
+        ipv4_address: 10.1.0.10
+    ports:
+    - '4800:22'
+    volumes: *ssh-volume
+
+  jenkins:
+    build:
+      dockerfile: DockerfileJenkins
+      context: .
+    image: jenkins_tester
+    hostname: myjenkins
+    volumes: 
+    - /home/student/jenkins_home:/var/jenkins_home
+    - ./tests:./tests
+    - ./ssh:/home/jenkins/.ssh
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /root/.docker/config.json:/home/jenkins/.docker/config.json
+    dns:
+       - "8.8.8.8"
+       - "4.4.4.4"
+    ports:
+    - '50000:50000'
+    - '8080:8080'
+    environment:
+    - 'HTTP_PROXY="http://172.31.0.3:8000"'
+    - 'HTTPS_PROXY="http://172.31.0.3:8000"'
+    - 'JAVA_OPTS="-Dhttp.proxyHost=172.31.0.3 -Dhttp.proxyPort=8000 -Dhttps.proxyHost=172.31.0.3 -Dhttps.proxyPort=8000"'
+    networks:
+      lan_1:
+        ipv4_address: 10.1.0.2
+      lan_2:
+        ipv4_address: 10.2.0.2
+      lan_3:
+        ipv4_address: 10.3.0.2
+      lan_4:
+        ipv4_address: 10.4.0.2
+      
+
+networks:
+  lan_1:
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.1.0.0/24
+    driver: bridge
+    internal: false
+
+  lan_2:
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.2.0.0/24
+    driver: bridge
+    internal: false
+
+  lan_3:
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.3.0.0/24
+    driver: bridge
+    internal: false
+
+  lan_4:
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.4.0.0/24
+    driver: bridge
+    internal: false

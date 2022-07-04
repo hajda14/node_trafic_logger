@@ -1,0 +1,22 @@
+
+FROM python:3.8-slim-buster
+
+WORKDIR /project
+
+COPY ./requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+RUN apt-get update && apt-get install -y openssh-server vim git 
+RUN mkdir /var/run/sshd
+RUN echo 'root:root' | chpasswd
+RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+EXPOSE 22
+
+COPY . .
+
+ENV NODE_TYPE=MASTER
+
+
+# ENTRYPOINT /usr/sbin/sshd -D &
+# CMD [ "python3", "app/main.py"]
+
+ENTRYPOINT ["/bin/bash", "-c", "/usr/sbin/sshd && python3 app/main.py "]

@@ -1,0 +1,16 @@
+
+FROM jenkins/jenkins
+
+WORKDIR /project
+COPY ./requirements.txt requirements.txt
+COPY . .
+USER root
+RUN apt-get update && apt-get install -y python3 python3-pip wget sudo
+RUN adduser jenkins sudo
+RUN echo "jenkins:jenkins" | chpasswd
+RUN pip3 install -r requirements.txt
+RUN echo "44.207.96.114 registry-1.docker.io" >> /etc/hosts
+RUN chmod -R 777 /project
+RUN groupadd docker && gpasswd -a jenkins docker
+USER jenkins
+
